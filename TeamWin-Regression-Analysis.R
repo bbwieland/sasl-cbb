@@ -63,6 +63,3 @@ ggplot(team_data_lead, aes(x = avg_rating, y = avg_next_3_win)) +
 
 lm(formula = avg_next_3_win ~ avg_rating,data = team_data_lead) %>%
   summary()
-
-
-
