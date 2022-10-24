@@ -22,6 +22,7 @@ team_data_lead = team_data %>%
          next_win_pct_3 = lead(win_pct,3)) %>%
   ungroup() %>%
   mutate(avg_next_3_win = (next_win_pct_1 + next_win_pct_2 + next_win_pct_3)/3) %>%
+  mutate(all_4_win = (win_pct + next_win_pct_1 + next_win_pct_2 + next_win_pct_3)/4) %>%
   filter(!is.na(avg_rating) & season <= 2019)
 
 # In season N
@@ -56,10 +57,10 @@ ggplot(team_data_lead, aes(x = avg_rating, y = next_win_pct_3)) +
 lm(formula = next_win_pct_3 ~ avg_rating,data = team_data_lead) %>%
   summary()
 
-# Average of seasons N+1 through N+3
-ggplot(team_data_lead, aes(x = avg_rating, y = avg_next_3_win)) +
+# Average of seasons N through N+3
+ggplot(team_data_lead, aes(x = avg_rating, y = all_4_win)) +
   geom_point() +
   geom_smooth(method = "lm")
 
-lm(formula = avg_next_3_win ~ avg_rating,data = team_data_lead) %>%
+lm(formula = all_4_win ~ avg_rating,data = team_data_lead) %>%
   summary()
