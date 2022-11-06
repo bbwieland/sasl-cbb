@@ -3,7 +3,7 @@ library(broom)
 
 team_results = read_csv("data/team_overall_results.csv")
 recruit_ranks = read_csv("data/team_recruit_ranks.csv")
-
+ 
 team_data = team_results %>%
   select(team, win_pct, season)
 
